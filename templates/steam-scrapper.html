@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block body %}
+  {% for title in steam_titles %}
+
+  <div class="col-lg-4 col-md-6 mb-4">
+    <div class="card h-100">
+      <a href="#">
+        <img class="card-img-top" src="{{title.find('img', attrs={'class':'tab_item_cap_img'})['src']|safe}}" alt="">
+      </a>
+      <div class="card-body">
+        <h4 class="card-title">
+          <a href="#">
+            {{title.find('div', attrs={'class':'tab_item_name'}).text|safe}}
+          </a>
+        </h4>
+        <h5>{{title.find('div', attrs={'class':'tab_item_top_tags'}).text|safe}}</h5>
+
+      </div>
+      <div class="card-footer">
+
+        <small>{{title.find('div', attrs={'class':'discount_pct'}).text|safe}}</small>
+        <small><strike>{{title.find('div', attrs={'class':'discount_original_price'}).text|safe}}</strike></small>
+        <small>{{title.find('div', attrs={'class':'discount_final_price'}).text|safe}}</small>
+      </div>
+    </div>
+  </div>
+{% endfor %}
+{% endblock %}
