@@ -1,4 +1,8 @@
-from flask import Flask
+from flask import Flask, render_template
+import requests
+from bs4 import BeautifulSoup
+
+#sys.path.insert(0, os.path.dirname(__file__))
 
 app = Flask(__name__)
 
