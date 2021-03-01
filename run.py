@@ -1,17 +1,11 @@
 from flask import Flask
 
+
 app = Flask(__name__)
 
-
-@app.route("/")
-def hello():
-    return "Hello World!"
-
-
-@app.route("/<string:name>/")
-def say_hello(name):
-    return f"Hello {name}!"
-
+@app.route('/')
+def index():
+    return 'hio'
 
 if __name__ == "__main__":
     app.run()
