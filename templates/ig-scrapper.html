@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block body %}
+<div class="row">
+
+    {% for data in datas %}
+
+    <div class="col-lg-6 col-md-6 mb-4">
+        <div class="card h-100">
+            <a href="#">
+                <img class="card-img-top" src="{{data['profile_pic_url_hd']|safe}}"
+                     alt="">
+            </a>
+            <div class="card-body">
+                <h4 class="card-title">
+                    <a href="https://www.instagram.com/{{data['username']|safe}}/">
+                        {{data['full_name']|safe}}
+                    </a>
+                </h4>
+                <h5>{{data['biography']|safe}}</h5>
+                <h5>{{data['external_url']|safe}}</h5>
+
+            </div>
+            <div class="card-footer">
+                <small>{{data['edge_owner_to_timeline_media']['count']|safe}} posts</small>
+                <small>{{data['edge_followed_by']['count']|safe}} follower</small>
+                <small>{{data['edge_follow']['count']|safe}} following</small>
+                <hr/>
+                <small>Private: {{data['is_private']|safe}}</small>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+
+</div>
+<!-- /.row -->
+{% endblock %}
