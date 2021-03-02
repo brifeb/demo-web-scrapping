@@ -16,16 +16,22 @@
                         {{data['full_name']|safe}}
                     </a>
                 </h4>
+                {% if data['biography'] is not none %}
                 <h5>{{data['biography']|safe}}</h5>
-                <h5>{{data['external_url']|safe}}</h5>
+                {% endif %}
+                {% if data['external_url'] is not none %}
+                <h6>{{data['external_url']|safe}}</h6>
+                {% endif %}
 
             </div>
             <div class="card-footer">
                 <small>{{data['edge_owner_to_timeline_media']['count']|safe}} posts</small>
                 <small>{{data['edge_followed_by']['count']|safe}} follower</small>
                 <small>{{data['edge_follow']['count']|safe}} following</small>
+                {% if data['is_private'] is true %}
                 <hr/>
-                <small>Private: {{data['is_private']|safe}}</small>
+                <small class="text-warning text-center">This Account is Private</small>
+                {% endif %}
             </div>
         </div>
     </div>
