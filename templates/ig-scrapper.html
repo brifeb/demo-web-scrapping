@@ -4,29 +4,31 @@
 
     {% for data in datas %}
 
-    <div class="col-lg-6 col-md-6 mb-4">
+    <div class="col-lg-4 col-md-6 mb-4">
         <div class="card h-100">
             <a href="#">
                 <img class="card-img-top" src="{{data['profile_pic_url_hd']|safe}}"
                      alt="">
             </a>
             <div class="card-body">
-                <h4 class="card-title">
+                <h4 class="font-weight-bold mb-0">
+                    {{data['full_name']|safe}}
                     <a href="https://www.instagram.com/{{data['username']|safe}}/">
-                        {{data['full_name']|safe}}
+                        <span class="text-muted font-weight-normal">@{{data['username']|safe}}</span>
                     </a>
                 </h4>
+
                 {% if data['biography'] is not none %}
-                <h5>{{data['biography']|safe}}</h5>
+                <small>{{data['biography']|safe}}</small>
                 {% endif %}
                 {% if data['external_url'] is not none %}
-                <h6>{{data['external_url']|safe}}</h6>
+                <p>{{data['external_url']|safe}}</p>
                 {% endif %}
 
             </div>
             <div class="card-footer">
                 <small>{{data['edge_owner_to_timeline_media']['count']|safe}} posts</small>
-                <small>{{data['edge_followed_by']['count']|safe}} follower</small>
+                <small>{{"{:,}".format(data['edge_followed_by']['count'])|safe}} follower</small>
                 <small>{{data['edge_follow']['count']|safe}} following</small>
                 {% if data['is_private'] is true %}
                 <hr/>

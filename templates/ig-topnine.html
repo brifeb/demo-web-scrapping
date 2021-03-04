@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% block body %}
+<div class="media align-items-center py-3 mb-3">
+    <a href="https://www.instagram.com/{{profile['graphql']['user']['username']|safe}}/">
+        <img class="d-block ui-w-10 rounded-circle" src="{{profile['graphql']['user']['profile_pic_url_hd']|safe}}"
+             alt="">
+    </a>
+    <div class="media-body ml-4">
+        <h4 class="font-weight-bold mb-0">
+            {{profile['graphql']['user']['full_name']|safe}}
+            <a href="https://www.instagram.com/{{profile['graphql']['user']['username']|safe}}/">
+                <span class="text-muted font-weight-normal">@{{profile['graphql']['user']['username']|safe}}</span>
+            </a>
+        </h4>
+        <small>{{profile['graphql']['user']['edge_owner_to_timeline_media']['count']|safe}} posts</small>
+        <small>{{"{:,}".format(profile['graphql']['user']['edge_followed_by']['count'])|safe}} follower</small>
+        <small>{{profile['graphql']['user']['edge_follow']['count']|safe}} following</small>
+
+    </div>
+</div>
+
+<H2>Most Likes</H2>
+<div class="row">
+
+    {% for data in toplikes %}
+
+    <div class="col-lg-4 col-md-6 mb-4">
+        <div class="card h-100">
+            <a href="https://www.instagram.com/p/{{data['node']['shortcode']|safe}}/">
+                <img class="card-img-top" src="{{data['node']['display_url']|safe}}"
+                     alt="">
+            </a>
+            <div class="card-footer">
+                <medium>{{"{:,}".format(data['node']['edge_media_preview_like']['count'])|safe}} ♥</medium>
+                <br/>
+                <small>{{millify(data['node']['edge_media_to_comment']['count'])|safe}} 🗨</small>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+<H2>Most Commented</H2>
+<div class="row bg-secondary pt-4">
+    {% for data in topcomments %}
+
+    <div class="col-lg-4 col-md-6 mb-4">
+        <div class="card h-100">
+            <a href="https://www.instagram.com/p/{{data['node']['shortcode']|safe}}/">
+                <img class="card-img-top" src="{{data['node']['display_url']|safe}}"
+                     alt="">
+            </a>
+            <div class="card-footer">
+                <medium>{{"{:,}".format(data['node']['edge_media_to_comment']['count'])|safe}} 🗨</medium>
+                <br/>
+                <small>{{millify(data['node']['edge_media_preview_like']['count'])|safe}} ♥</small>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+<!-- /.row -->
+
+{% endblock %}
