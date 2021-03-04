@@ -6,17 +6,17 @@
 
     <div class="col-lg-4 col-md-6 mb-4">
         <div class="card h-100">
-            <a href="#">
+            <a href="{{title['href']}}" target="_blank">
                 <img class="card-img-top" src="{{title.find('img', attrs={'class':'tab_item_cap_img'})['src']|safe}}"
                      alt="">
             </a>
             <div class="card-body">
-                <h4 class="card-title">
-                    <a href="#">
+                <h5 class="card-title">
+                    <a href="{{title['href']}}" target="">
                         {{title.find('div', attrs={'class':'tab_item_name'}).text|safe}}
                     </a>
-                </h4>
-                <h5>{{title.find('div', attrs={'class':'tab_item_top_tags'}).text|safe}}</h5>
+                </h5>
+                <p>{{title.find('div', attrs={'class':'tab_item_top_tags'}).text|safe}}</p>
 
             </div>
             <div class="card-footer">

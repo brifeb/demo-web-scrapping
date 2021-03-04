@@ -2,26 +2,26 @@
 {% block body %}
 
 <div class="row">
-  {% for gambar in gambars %}
+    {% for gambar in gambars %}
 
- <div class="col-lg-4 col-md-6 mb-4">
-    <div class="card h-100">
-      <a href="#">
-        <img class="card-img-top" src="{{ gambar.find('a').find('img')['src']|safe }}" alt="">
-      </a>
-      <div class="card-body">
-        <h4 class="card-title">
-          <a href="{{gambar.find('a')['href']|safe}}">
-            {{ gambar.find('a').find('img')['title']|safe }}
-          </a>
-        </h4>
-      </div>
-    </div>
-  </div>
-
-  {% endfor %}
+    <div class="col-lg-4 col-md-6 mb-4">
+        <div class="card h-100">
+            <a href="{{gambar.find('a')['href']|safe}}" target="_blank">
+                <img class="card-img-top" src="{{ gambar.find('a').find('img')['src']|safe }}" alt="">
+            </a>
+            <div class="card-body">
+                <h5 class="card-title">
+                    <a href="{{gambar.find('a')['href']|safe}}" target="_blank">
+                        {{ gambar.find('a').find('img')['title']|safe }}
+                    </a>
+                </h5>
             </div>
-        <!-- /.row -->
+        </div>
+    </div>
+
+    {% endfor %}
+</div>
+<!-- /.row -->
 {% endblock %}
 
 
