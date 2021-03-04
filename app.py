@@ -64,11 +64,12 @@ def instagram():
 def igtopnine():
     username = 'valeyellow46'
 
-    with(open(f'data/{username}.json', 'r')) as fl:
+    with(open(f'/home/tokoazco/demos.nggih.com/demoscrap/data/{username}.json', 'r')) as fl:
         profile = json.load(fl)
-    with(open(f'data/{username}-top9comment.json', 'r')) as fl:
+    with(open(f'/home/tokoazco/demos.nggih.com/demoscrap/data/{username}-top9comment.json', 'r')) as fl:
         top_9_comm = json.load(fl)
-    with(open(f'data/{username}-top9like.json', 'r')) as fl:
+
+    with(open(f'/home/tokoazco/demos.nggih.com/demoscrap/data/{username}-top9like.json', 'r')) as fl:
         top_9_likes = json.load(fl)
 
     return render_template('ig-topnine.html', profile = profile, toplikes=top_9_likes, topcomments=top_9_comm, millify=millify)
