@@ -1,7 +1,7 @@
 from flask import Flask, render_template
 import requests, json
 from bs4 import BeautifulSoup
-import math
+import math, os
 
 def millify(n):
     millnames = ['', ' k', ' m', ' b', ' t']
@@ -11,7 +11,7 @@ def millify(n):
 
     return '{:.2f}{}'.format(n / 10**(3 * millidx), millnames[millidx])
 
-#sys.path.insert(0, os.path.dirname(__file__))
+
 
 app = Flask(__name__)
 
@@ -64,12 +64,14 @@ def instagram():
 def igtopnine():
     username = 'valeyellow46'
 
-    with(open(f'/home/tokoazco/demos.nggih.com/demoscrap/data/{username}.json', 'r')) as fl:
-        profile = json.load(fl)
-    with(open(f'/home/tokoazco/demos.nggih.com/demoscrap/data/{username}-top9comment.json', 'r')) as fl:
-        top_9_comm = json.load(fl)
+    PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
+    DATA_DIR = os.path.join(PROJECT_ROOT, "data/")
 
-    with(open(f'/home/tokoazco/demos.nggih.com/demoscrap/data/{username}-top9like.json', 'r')) as fl:
+    with(open(f'{DATA_DIR}/{username}.json', 'r')) as fl:
+        profile = json.load(fl)
+    with(open(f'{DATA_DIR}/{username}-top9comment.json', 'r')) as fl:
+        top_9_comm = json.load(fl)
+    with(open(f'{DATA_DIR}/{username}-top9like.json', 'r')) as fl:
         top_9_likes = json.load(fl)
 
     return render_template('ig-topnine.html', profile = profile, toplikes=top_9_likes, topcomments=top_9_comm, millify=millify)
