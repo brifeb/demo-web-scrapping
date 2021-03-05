@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Febrianto - Demo Web Scrapper</title>
+    <title>From Twitter</title>
 
     <!-- Bootstrap core CSS -->
     <link href="{{ url_for('static', filename='/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
@@ -31,9 +31,15 @@
 
         <div class="col-{{size_thumb}} px-1 my-0">
             <div class="card my-0">
+                <!--
                 <a href="{{data['video_url']|safe}}">
                     <img class="card-img-top" src="{{ data['thumb_url']|safe }}" alt="" loading="lazy">
                 </a>
+                -->
+                <video autoplay muted loop>
+                    <source src="{{data['video_url']|safe}}" type="video/mp4">
+                </video>
+
             </div>
         </div>
 
