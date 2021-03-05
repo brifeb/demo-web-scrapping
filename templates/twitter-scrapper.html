@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block body %}
+
+<div class="row">
+    {% for data in datas %}
+
+    <div class="col-lg-{{size_thumb}} col-md-{{size_thumb}} mb-4">
+        <div class="card h-100">
+            <a href="{{data['video_url']|safe}}" target="_blank">
+                <img class="card-img-top" src="{{ data['thumb_url']|safe }}" alt="" loading="lazy">
+            </a>
+        </div>
+    </div>
+
+    {% endfor %}
+</div>
+
+{% endblock %}
