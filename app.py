@@ -43,9 +43,9 @@ def detik_populer():
 
     return render_template('detik-scrapper.html', gambars = gambars)
 
-@app.route('/idr-rates')
+@app.route('/usd-rates')
 def idr_rates():
-    source = requests.get('http://www.floatrates.com/daily/idr.json')
+    source = requests.get('http://www.floatrates.com/daily/usd.json')
     json_data = source.json()
     return render_template('rates-scrapper.html', datas = json_data.values())
 
@@ -94,6 +94,31 @@ def twitter():
 
     return render_template('twitter-scrapper.html', datas=datas, size_thumb=size_thumb, username=username)
 
+@app.route('/linkedin')
+def linkerin():
+    url = 'https://www.linkedin.com/jobs/engineering-jobs-jakarta'
+    job_list = []
+    for p in range(1):
+        params = {
+            'trk': 'homepage-basic_suggested-search',
+            'position': 1,
+            'pageNum': p
+        }
+        res = requests.get(url, params=params).text
+        soup = BeautifulSoup(res, features="html.parser")
+        jobs = soup.findAll('li', attrs={'class': 'result-card'})
+        for job in jobs:
+            title = job.find('h3').text
+            job_url = job.find('a')['href']
+            company = job.find('h4').text
+            location = job.find('span', attrs={'class': 'job-result-card__location'}).text
+            desc = job.find('p').text
+            time = job.find('time').text
+            job_summary = {'title': title, 'company': company, 'location': location, 'desc': desc, 'time': time,
+                           'job_url': job_url}
+            job_list.append(job_summary)
+
+    return render_template('linkedin-scrapper.html', jobs=job_list)
 
 @app.route('/<string:pagename>')
 def pages(pagename):

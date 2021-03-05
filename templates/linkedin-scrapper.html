@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block body %}
+<div class="card">
+    <table class="table">
+        <thead class="thead-dark">
+        <tr>
+            <th>Position</th>
+            <th>Link</th>
+            <th>Company</th>
+            <th>Description</th>
+            <th>Time</th>
+            <th>Location</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for job in jobs %}
+        <tr>
+            <td><strong>{{ job['title'] }}</strong></td>
+            <td><a href="{{ job['job_url'] }}">🔗</a></td>
+            <td>{{ job['company'] }}</td>
+            <td>{{ job['desc'] }}</td>
+            <td>{{ job['time'] }}</td>
+            <td>{{ job['location'] }}</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
