@@ -87,8 +87,6 @@ def twitter(size_thumb=2):
     with(open(f'{DATA_DIR}/{username}-vid.json', 'r')) as fl:
         datas = json.load(fl)
 
-    datas = datas[:6]
-
     return render_template('twitter-scrapper.html', datas=datas, size_thumb=size_thumb)
 
 
