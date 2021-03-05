@@ -30,11 +30,11 @@
         {% for data in datas %}
 
         <div class="col-{{size_thumb}} px-1 my-0">
-<!--            <div class="card my-0">-->
+            <div class="card my-0">
             <video autoplay muted loop playsinline>
                 <source src="{{data['video_url']|safe}}" type="video/mp4">
             </video>
-<!--            </div>-->
+            </div>
         </div>
 
         {% endfor %}
