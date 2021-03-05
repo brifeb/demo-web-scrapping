@@ -1,55 +1,30 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <title>From Twitter</title>
-
-    <!-- Bootstrap core CSS -->
-    <link href="{{ url_for('static', filename='/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
-
-    <!-- Custom styles for this template -->
-    <link href="{{ url_for('static', filename='/css/paper-dashboard.min.css') }}" rel="stylesheet">
-
-    <link href="{{ url_for('static', filename='/img/favicon.ico') }}" rel="icon">
-
-</head>
-
-<body style="background-color: #f4f3ef;" class="my-2">
+{% extends 'base.html' %}
+{% block body %}
 
 
-<!-- Page Content -->
-<div class="container">
+<h2>Twit Videos from
+    <span class="text-muted font-weight-normal">
+        <a href="https://twitter.com/{{username}}">@{{username}}</a>
+    </span>
+</h2>
+<div class="row">
+    {% for data in datas %}
 
-    <div class="row">
-        {% for data in datas %}
-
-        <div class="col-{{size_thumb}} px-1 my-0">
-            <div class="card my-0">
-                <a href="{{data['video_url']|safe}}">
-                    <img class="card-img-top" src="{{ data['thumb_url']|safe }}" alt="" loading="lazy">
-                </a>
+    <div class="col-{{size_thumb}}">
+        <div class="card">
+            <video autoplay muted loop playsinline>
+                <source src="{{data['video_url']|safe}}" type="video/mp4">
+            </video>
+            <div class="card-footer">
+                    <a href="{{data['twit_url']|safe}}" target="">
+                        <p>{{data['twit_text']|safe}}</p>
+                    </a>
             </div>
         </div>
-
-        {% endfor %}
     </div>
 
-
+    {% endfor %}
 </div>
-<!-- /.container -->
-
-
-<!-- Bootstrap core JavaScript -->
-<script src="{{ url_for('static', filename='/vendor/jquery/jquery.min.js') }}"></script>
-<script src="{{ url_for('static', filename='/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-
-</body>
-
-</html>
-
+</div>
+<!-- /.row -->
+{% endblock %}

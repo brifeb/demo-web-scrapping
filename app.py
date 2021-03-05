@@ -79,10 +79,10 @@ def igtopnine():
 
     return render_template('ig-topnine.html', profile = profile, toplikes=top_9_likes, topcomments=top_9_comm, millify=millify)
 
-@app.route('/twitter<int:size_thumb>')
-def twitter(size_thumb=2):
-    username = 'rating'
-    # size_thumb = 1
+@app.route('/twitter')
+def twitter():
+    username = 'ladbible'
+    size_thumb = 3
 
     PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
     DATA_DIR = os.path.join(PROJECT_ROOT, "data/")
@@ -90,9 +90,9 @@ def twitter(size_thumb=2):
     with(open(f'{DATA_DIR}/{username}-vid.json', 'r')) as fl:
         datas = json.load(fl)
 
-    # datas = datas[100:112]
+    datas = datas[:12]
 
-    return render_template('twitter-scrapper.html', datas=datas, size_thumb=size_thumb)
+    return render_template('twitter-scrapper.html', datas=datas, size_thumb=size_thumb, username=username)
 
 
 @app.route('/<string:pagename>')
