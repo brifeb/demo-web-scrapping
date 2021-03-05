@@ -1,18 +1,55 @@
-{% extends 'base.html' %}
-{% block body %}
+<!DOCTYPE html>
+<html lang="en">
 
-<div class="row">
-    {% for data in datas %}
+<head>
 
-    <div class="col-lg-{{size_thumb}} col-md-{{size_thumb}} mb-4">
-        <div class="card h-100">
-            <a href="{{data['video_url']|safe}}" target="_blank">
-                <img class="card-img-top" src="{{ data['thumb_url']|safe }}" alt="" loading="lazy">
-            </a>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Febrianto - Demo Web Scrapper</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{{ url_for('static', filename='/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="{{ url_for('static', filename='/css/paper-dashboard.min.css') }}" rel="stylesheet">
+
+    <link href="{{ url_for('static', filename='/img/favicon.ico') }}" rel="icon">
+
+</head>
+
+<body style="background-color: #f4f3ef;" class="my-2">
+
+
+<!-- Page Content -->
+<div class="container">
+
+    <div class="row">
+        {% for data in datas %}
+
+        <div class="col-{{size_thumb}} px-1 my-0">
+            <div class="card my-0">
+                <a href="{{data['video_url']|safe}}">
+                    <img class="card-img-top" src="{{ data['thumb_url']|safe }}" alt="" loading="lazy">
+                </a>
+            </div>
         </div>
+
+        {% endfor %}
     </div>
 
-    {% endfor %}
-</div>
 
-{% endblock %}
+</div>
+<!-- /.container -->
+
+
+<!-- Bootstrap core JavaScript -->
+<script src="{{ url_for('static', filename='/vendor/jquery/jquery.min.js') }}"></script>
+<script src="{{ url_for('static', filename='/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+
+</body>
+
+</html>
+
