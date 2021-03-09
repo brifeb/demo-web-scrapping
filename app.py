@@ -124,5 +124,15 @@ def linkerin():
 def pages(pagename):
     return render_template(f'{pagename}.html')
 
+# @app.errorhandler(404)
+# def not_found(e):
+#     return render_template("error.html")
+
+@app.errorhandler(Exception)
+def not_found(e):
+    return render_template("error.html", e=e.code)
+
+
 if __name__ == "__main__":
-    app.run(debug=True)
+    # app.run(debug=True)
+    app.run()
