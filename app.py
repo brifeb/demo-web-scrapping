@@ -65,7 +65,7 @@ def instagram():
 
 @app.route('/igtopnine')
 def igtopnine():
-    username = 'valeyellow46'
+    username = 'anadata.id'
 
     PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
     DATA_DIR = os.path.join(PROJECT_ROOT, "data/")
