@@ -10,7 +10,8 @@
 <div class="row">
     {% for data in datas %}
 
-    <div class="col-{{size_thumb}}">
+<!--    <div class="col-{{size_thumb}}">-->
+    <div class="col-lg-4 col-md-6 mb-4">
         <div class="card">
             <video autoplay muted loop playsinline>
                 <source src="{{data['video_url']|safe}}" type="video/mp4">
