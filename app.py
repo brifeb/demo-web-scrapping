@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 import requests, json
 from bs4 import BeautifulSoup
 import math, os
@@ -10,7 +10,6 @@ def millify(n):
                         int(math.floor(0 if n == 0 else math.log10(abs(n))/3))))
 
     return '{:.2f}{}'.format(n / 10**(3 * millidx), millnames[millidx])
-
 
 
 app = Flask(__name__)
@@ -65,19 +64,33 @@ def instagram():
 
 @app.route('/igtopnine')
 def igtopnine():
-    username = 'anadata.id'
+    update_img = request.args.get('update') or False
+    username = 'valeyellow46'
 
     PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
-    DATA_DIR = os.path.join(PROJECT_ROOT, "data/")
+    DATA_DIR = os.path.join(PROJECT_ROOT, "data")
+
 
     with(open(f'{DATA_DIR}/{username}.json', 'r')) as fl:
         profile = json.load(fl)
-    with(open(f'{DATA_DIR}/{username}-top9comment.json', 'r')) as fl:
+    with(open(f'{DATA_DIR}/{username}-top9comments.json', 'r')) as fl:
         top_9_comm = json.load(fl)
-    with(open(f'{DATA_DIR}/{username}-top9like.json', 'r')) as fl:
+    with(open(f'{DATA_DIR}/{username}-top9likes.json', 'r')) as fl:
         top_9_likes = json.load(fl)
 
-    return render_template('ig-topnine.html', profile = profile, toplikes=top_9_likes, topcomments=top_9_comm, millify=millify)
+    top9like_img = []
+    top9comm_img = []
+    for i in range(9):
+        top9like_img.append(f'/static/img/{username}/{username}-{i+1}-top9likes.jpg')
+        top9comm_img.append(f'/static/img/{username}/{username}-{i+1}-top9comments.jpg')
+
+    print(top9comm_img)
+
+    return render_template('ig-topnine.html',
+                           profile = profile,
+                           toplikes=zip(top_9_likes,top9like_img),
+                           topcomments=zip(top_9_comm,top9comm_img),
+                           millify=millify)
 
 @app.route('/twitter')
 def twitter():
@@ -134,5 +147,5 @@ def not_found(e):
 
 
 if __name__ == "__main__":
-    # app.run(debug=True)
-    app.run()
+    app.run(debug=True)
+    # app.run()

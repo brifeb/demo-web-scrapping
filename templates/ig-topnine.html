@@ -22,12 +22,12 @@
 <H2>Most Likes</H2>
 <div class="row">
 
-    {% for data in toplikes %}
+    {% for data, img in toplikes %}
 
     <div class="col-lg-4 col-md-6 mb-4">
         <div class="card h-100">
             <a href="https://www.instagram.com/p/{{data['node']['shortcode']|safe}}/" target="_blank">
-                <img class="card-img-top" src="{{data['node']['display_url']|safe}}"
+                <img class="card-img-top" src="{{ img|safe}}"
                      alt="">
             </a>
             <div class="card-footer">
@@ -41,12 +41,13 @@
 </div>
 <H2>Most Commented</H2>
 <div class="row bg-secondary pt-4">
-    {% for data in topcomments %}
+    {% for data, img in topcomments %}
 
     <div class="col-lg-4 col-md-6 mb-4">
         <div class="card h-100">
             <a href="https://www.instagram.com/p/{{data['node']['shortcode']|safe}}/" target="_blank">
-                <img class="card-img-top" src="{{data['node']['display_url']|safe}}"
+<!--                <img class="card-img-top" src="{{data['node']['display_url']|safe}}" alt="">-->
+                <img class="card-img-top" src="{{ img|safe}}"
                      alt="">
             </a>
             <div class="card-footer">
