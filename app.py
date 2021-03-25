@@ -64,7 +64,7 @@ def instagram():
 
 @app.route('/igtopnine')
 def igtopnine():
-    update_img = request.args.get('update') or False
+    # update_img = request.args.get('update') or False
     username = 'valeyellow46'
 
     PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
@@ -147,5 +147,5 @@ def not_found(e):
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
-    # app.run()
+    # app.run(debug=True)
+    app.run()

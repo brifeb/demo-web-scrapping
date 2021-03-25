@@ -6,12 +6,12 @@
 
     <div class="col-lg-4 col-md-6 mb-4">
         <div class="card h-100">
-            <a href="{{gambar.find('a')['href']|safe}}" target="_blank">
+            <a href="{{gambar.find('a')['href']|safe}}" target="_blank" rel="noopener noreferrer">
                 <img class="card-img-top" src="{{ gambar.find('a').find('img')['src']|safe }}" alt="">
             </a>
             <div class="card-body">
                 <h5 class="card-title">
-                    <a href="{{gambar.find('a')['href']|safe}}" target="_blank">
+                    <a href="{{gambar.find('a')['href']|safe}}" target="_blank" rel="noopener noreferrer">
                         {{ gambar.find('a').find('img')['title']|safe }}
                     </a>
                 </h5>
