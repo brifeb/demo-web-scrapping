@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request
-import requests, json
+import requests, json, platform
 from bs4 import BeautifulSoup
 import math, os
 
@@ -51,14 +51,17 @@ def idr_rates():
 @app.route('/instagram')
 def instagram():
     headers = {
-        'cookie': 'csrftoken=tCnfL3s9LPVnJKyBsUB2zNTRfXN7ZIMF; ig_did=83F3627C-09E1-4CD6-8C7F-D52B90C882C7; ig_nrcb=1; mid=XGo2dQAEAAG1yHcB9Z8SxuXLq16Q',
-        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0.3 Safari/605.1.15'
+        'cookie': 'mid=W2b0DAAEAAFbGydJZW58lOkhgeoZ; ig_did=80108C7D-D4E0-4DCE-98D3-B74C5A991B81; fbm_124024574287414=base_domain=.instagram.com; ig_nrcb=1; ds_user_id=11167978215; csrftoken=H0wnh0uPuP6R4zUrW727nq8ac253Zj29; sessionid=11167978215:4RS02ZBaFnXSDz:26; shbid=155; datr=LQpLYM8y2nj_4CfS9KDhl9dT; shbts=1617092161.156662; rur=PRN; fbsr_124024574287414=L9IdKKnHtyyHpZJNcidmS5z4CTjMUxjVsDPBbhvfsAg.eyJ1c2VyX2lkIjoiMTI0OTgzMzI4MiIsImNvZGUiOiJBUURNeS0wSXFGUFVYQ0ZaLVpSUFdrcDY3czlZZk1MdXUtWW5hVzJfMjEwYWdMdGNlekxfVG54X2FtS2xSQUQ1SGtvZUwzS0NNWlR1MWctLVJPLWotZGE0OEpYbnYxc18wWG1JaTJ3UWxFcW81Ql9oWjRrN0FtYkZXeS0tZ1JQSUlmYkc0Yl8wOUdoNHhNbXJteFJuQ0lLNFhtX0YtbW5tUDNabTBvTVJkcFdVWXhMRnc3dEdBYldPV1Q2OURBWV9hQ3ZEWVE3d3hHQ3FMQ0syck1LdWowR2dlS3QwY2hvVnFkMXhQREFhTHJLenhfUlZCUDVTQ2xJWHkzckZPM3NpYldGWlVmU3NpbmlDUU4ta3R1R3J2a0RndTRiRHZoeWVtSndUaEttcWkwYnI4bzlnVVZkQnZBcTNtYU91NTN3X0xLNCIsIm9hdXRoX3Rva2VuIjoiRUFBQnd6TGl4bmpZQkFCR2UzanpGZWxXaWE1Q2paQ2tjZTdKbkpmWkExQ1BhZFdHb3Q5Q3Y0VmRyUjNTeEtvQUl1WkM2eEo1V0RuZEVZSW9Ld1I5Z2lMRGVXQ3pkSDhYeGo1NkFmTVRja0daQ1lqVHBiTEFZTWRCSzdsM1R4M0lBclBQVzdhS2VwbFQyelpCc0pxZWZNYkZnVTVvZkFOaTJoUzJsUElQam9xa1pCbE42Y1lDYWJQczVleTlqam9OSndaRCIsImFsZ29yaXRobSI6IkhNQUMtU0hBMjU2IiwiaXNzdWVkX2F0IjoxNjE3MDkyMTY2fQ',
+        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36'
     }
     ig_users = ['brifeb', 'valeyellow46', 'leomessi', 'gianluigibuffon', 'cristiano', 'marcmarquez93']
     users = []
     for usr in ig_users:
         url = f'https://www.instagram.com/{usr}/?__a=1'
-        res = requests.get(url, headers=headers).json()
+        respon = requests.get(url, headers=headers)
+        # print(url, respon)
+        res = respon.json()
+        # print(res)
         users.append(res['graphql']['user'])
     return render_template('ig-scrapper.html', datas = users)
 
@@ -84,7 +87,7 @@ def igtopnine():
         top9like_img.append(f'/static/img/{username}/{username}-{i+1}-top9likes.jpg')
         top9comm_img.append(f'/static/img/{username}/{username}-{i+1}-top9comments.jpg')
 
-    print(top9comm_img)
+    # print(top9comm_img)
 
     return render_template('ig-topnine.html',
                            profile = profile,
@@ -147,5 +150,6 @@ def not_found(e):
 
 
 if __name__ == "__main__":
-    # app.run(debug=True)
+    if platform.system() == 'Darwin':
+        app.run(debug=True)
     app.run()
