@@ -7,3 +7,6 @@ Nambah dari cob
 
 
 Ini cob
+
+
+nambahin cob, apakah need stash?
